@@ -1,101 +1,95 @@
-import Image from "next/image";
+"use client"
+
+import { useState } from 'react';
+import Head from 'next/head';
+import { BsFillMoonStarsFill } from 'react-icons/bs';
+import { AnimatePresence, motion } from 'framer-motion';
+import PortfolioCards from '@/components/PortfolioCards'
+import DetailView from '@/components/DetailView'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faGithub, faLinkedin, } from "@fortawesome/free-brands-svg-icons"
+import { faW } from "@fortawesome/free-solid-svg-icons"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [darkMode, setDarkMode] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [selectedCard, setSelectedCard] = useState<any>(null)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  return (
+    <div className={darkMode ? "dark" : ""}>
+      <Head>
+        <title>Dennis Portfolio</title>
+      </Head>
+      <main className="bg-slate-600">
+        <nav className="fixed flex top-0 justify-between items-center left-0 w-full text-white p-4 z-50 dark:text-white">
+          <h1 className="font-burtons text-xl">dkg</h1>
+          <ul className="flex items-center m-auto">
+            <li className=''>
+              <a className='h-1 bg-black mr-10 block w-64'></a>
+            </li>
+            <li className='px-2'>
+              <a href="https://github.com/dgkraus/" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon 
+                  icon={faGithub} 
+                  size="2x" 
+                  className="transition-all hover:rotate-[360deg] ease-linear duration-300 cursor-pointer"
+                />
+              </a>
+            </li>
+            <li className='px-2'>
+              <a href="https://www.linkedin.com/in/dennisgk/" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon 
+                  icon={faLinkedin} 
+                  size="2x" 
+                  className="transition-all hover:rotate-[360deg] ease-linear duration-300 cursor-pointer"
+                />
+              </a>
+            </li>
+            <li className='px-2'>
+              <a href="https://www.wantedly.com/id/dennis_kraus" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon 
+                  icon={faW} 
+                  size="2x" 
+                  className="transition-all hover:rotate-[360deg] ease-linear duration-300 cursor-pointer"
+                />
+              </a>
+            </li>
+            <li>
+              <a className='h-1 bg-black ml-10 block w-64'></a>
+            </li>
+            </ul>
+            <ul className="flex">
+              <li>
+                <BsFillMoonStarsFill
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="cursor-pointer text-2xl"
+                />
+              </li>
+          </ul>
+        </nav>
+        <section className="relative min-h-screen flex items-center justify-center">
+        <AnimatePresence>
+            <motion.div
+              key={isExpanded ? 'detail' : 'list'}
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: '100%' }}
+              exit={{ opacity:0, width: 0, transition: { duration: 0.5 } }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="profile-container absolute w-full"
+            >
+              {!isExpanded ? (
+                <PortfolioCards
+                  setIsExpanded={setIsExpanded}
+                  setSelectedCard={setSelectedCard}
+                  isExpanded={isExpanded}
+                />
+              ) : (
+                <DetailView setIsExpanded={setIsExpanded} selectedCard={selectedCard}  />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
