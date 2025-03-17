@@ -3,6 +3,7 @@ import { TiArrowBack } from "react-icons/ti";
 import CardIdolizeV2 from './CardIdolizeV2'
 import CardIdolizeV1 from './CardIdolizeV1';
 import CardGobzer from './CardGobzer';
+import AdditionalInfo from './AdditionalInfo'
 
 interface Card {
   id: number
@@ -29,6 +30,8 @@ const DetailView: React.FC<DetailViewProps> = ({ selectedCard, setIsExpanded }) 
         return <CardIdolizeV1 />
       case 2:
         return <CardGobzer />
+      case 3:
+        return <AdditionalInfo />
       default:
         return <p>Something went wrong, pelase select a different card</p>
     }
@@ -38,7 +41,7 @@ const DetailView: React.FC<DetailViewProps> = ({ selectedCard, setIsExpanded }) 
     
   return (       
       <div
-        className="font-burtons max-h-screen shadow-lg p-10 rounded-xl my-10 transition-transform duration-300 dark:bg-white flex-1 bg-gradient-to-b from-cyan-500 to-white"
+        className="font-burtons max-h-screen shadow-lg p-10 rounded-xl my-10 transition-transform duration-300 dark:bg-white flex-1 bg-gradient-to-b from-blue-400 to-gray-200"
       > 
       <TiArrowBack onClick={() => setIsExpanded(false)} className='cursor-pointer hover:scale-110 transition-transform size-10'>----</TiArrowBack>
         {renderCard()}

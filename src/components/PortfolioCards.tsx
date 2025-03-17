@@ -35,12 +35,12 @@ const Cards = [
   },
   {
     id: 3,
-    headline: "Frontend",
-    subheading: "Creating elegant designs",
-    line1: "React",
-    line2: "Javascript",
-    line3: "Typescript",
-    line4: "NextJS"
+    headline: "Additional skills",
+    subheading: "Curious about my other skills? Click to explore!",
+    line1: "Fullstack developments (React, Next.js, Django)",
+    line2: "QA based on ISTQB principles",
+    line3: "Strong problem-solving and communication skills",
+    desc: "I thrive on challenges and am eager to continuously expand my skill set. I enjoy mastering a new framework or improving my current skills."
   }
 ];
 
@@ -60,15 +60,15 @@ const PortfolioCards: React.FC<PortfolioCardsProps> = ({ setIsExpanded, setSelec
         setIsExpanded(true)
       }}
     >
-      <div className="relative text-center flex-1 shadow-lg p-10 rounded-xl my-10 hover:scale-105 hover:z-10 transition-transform duration-500 dark:bg-white bg-gradient-to-b from-cyan-500 to-white outline outline-10 outline-black border-r-8 border-cyan-600">
-        <h3 className="text-lg font-medium pt-8 pb-2">{card.headline}</h3>
-        <h4 className="py-4 text-teal-600 ">{card.subheading}</h4>
-        <p className="text-gray-800 py-1 ">{card.line1}</p>
-        <p className="text-gray-800 py-1 ">{card.line2}</p>
-        <p className="text-gray-800 py-1 ">{card.line3}</p>
-        <p className="text-gray-800 py-1 ">{card.line4}</p>
-        <p className="text-gray-800 py-1 ">{card.line5}</p>
-        <p className="text-red-300 py-10 ">{card.desc}</p>
+      <div className="relative text-center flex-1 shadow-lg p-10 rounded-xl my-10 hover:scale-105 hover:z-10 transition-transform duration-500 dark:bg-white bg-gradient-to-b from-blue-400 to-gray-200 outline outline-10 outline-black border-r-8 border-gray-500">
+        <h3 className="text-lg font-medium pt-8 pb-2 tracking-wider">{card.headline}</h3>
+        <h4 className="py-4 text-blue-600 ">{card.subheading}</h4>
+        <p className="text-black py-1 ">{card.line1}</p>
+        <p className="text-black py-1 ">{card.line2}</p>
+        <p className="text-black py-1 ">{card.line3}</p>
+        <p className="text-black py-1 ">{card.line4}</p>
+        <p className="text-black py-1 ">{card.line5}</p>
+        <p className="text-blue-900 italic py-10 ">{card.desc}</p>
       </div>
     </li>
   ))
